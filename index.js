@@ -8,13 +8,24 @@ async function fetchImage() {
         errorMessageE1.style.display = 'block';
         return
     }
+
+    imgs = " ";
+
     try {
         await fetch(
             `https://api.unsplash.com/photos?per_page=${inputValue}&page=${Math.round(Math.random() * 1000)}&client_id=ChzrpPyrs1W0UPWJeI78VOnjyEZO5JdJX2tHQJhJNTg`
         )
             .then((res) =>
                 res.json().then((data) => {
-                    console.log(data);
+                    if (data) {
+                        data.forEach((pic) => {
+                            imgs += `
+                            <img src=${pic.urls.small} alr ='image'/>
+                            `;
+                            galleryE1.style.display = 'block';
+                            galleryE1.innerHTML = imgs;
+                        })
+                    }
                 })
             );
         errorMessageE1.style.display = 'none';
