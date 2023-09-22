@@ -12,6 +12,9 @@ async function fetchImage() {
     imgs = " ";
 
     try {
+        btnE1.style.display = "none";
+        const loading = `<img src ="spinner.svg"/>`;
+        galleryE1.innerHTML = loading;
         await fetch(
             `https://api.unsplash.com/photos?per_page=${inputValue}&page=${Math.round(Math.random() * 1000)}&client_id=ChzrpPyrs1W0UPWJeI78VOnjyEZO5JdJX2tHQJhJNTg`
         )
@@ -24,6 +27,7 @@ async function fetchImage() {
                             `;
                             galleryE1.style.display = 'block';
                             galleryE1.innerHTML = imgs;
+                            btnE1.style.display = "block";
                         })
                     }
                 })
@@ -32,6 +36,7 @@ async function fetchImage() {
     } catch (error) {
         errorMessageE1.style.display = 'block';
         errorMessageE1.innerHTML = "An error happened, try it later"
+        btnE1.style.display = "black";
 
     }
 
